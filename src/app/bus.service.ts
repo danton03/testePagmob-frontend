@@ -14,15 +14,10 @@ export class BusService {
     this.busServicesData = [];
   }
 
-  obterServices(){
-    axios.get(API_URL)
-    .then((res => {
-      const data: IApiData = res.data;
-      this.busServicesData = data.services;
-    }))
-    .catch(error => {
-      console.log("Houve um erro na requisição da API", error);
-    })
+  async obterServices(){
+    const res = await axios.get(API_URL)
+    const data: IApiData = await res.data;
+    this.busServicesData = data.services;
     return this.busServicesData; 
   }
 

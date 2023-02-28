@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BusService } from './bus.service';
 import { IBusService } from "../interfaces/busServicesInterface";
 
@@ -8,11 +8,16 @@ import { IBusService } from "../interfaces/busServicesInterface";
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'teste-pagmob-frontend';
   constructor(private busService: BusService){}
-  getBusServices(){
-    const servicesData = this.busService.obterServices()
-    console.log(servicesData);
+
+  async ngOnInit() {
+    await this.getBusServices();
+  }
+
+  async getBusServices(){
+    const service = await this.busService.obterServices();
+    console.log("servicesData", service);
   }
 }
